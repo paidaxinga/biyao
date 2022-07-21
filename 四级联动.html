@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang='zh'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            overflow: hidden;
+        }
+
+        li {
+            float: left;
+            margin: 5px;
+            padding: 5px;
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+
+        .active {
+            color: white;
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+    </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script crossorigin src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
+<script src="./area.js"></script>
+<script type="text/babel">
+    const { Component, Fragment } = React
+
+    class Child extends Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+
+            }
+        }
+        render() {
+            const { area, shiArr, qvArr, jiedaoArr, shengVal, shiVal, qvVal, jiedaoVal,jiedaoCl } = this.props
+            // console.log(area);
+
+            return (
+                <div>
+                    <ul>
+                        <li>
+                            <h1>省</h1>
+                        </li>
+                        {
+                            Object.keys(area).map(sheng => {
+                                return (
+                                    <li className={shengVal == sheng ? 'active' : ''} onClick={() => { this.props.shengCl(sheng) }}>{sheng}</li>
+                                )
+                            })
+                        }
+                    </ul>
+                    <hr />
+                    <ul>
+                        <li>
+                            <h1>市</h1>
+                        </li>
+                        {
+                            shiArr.map(shi => {
+                                return (
+                                    <li className={shiVal == shi ? 'active' : ''} onClick={() => { this.props.shiCl(shi) }}>{shi}</li>
+                                )
+                            })
+                        }
+                    </ul>
+                    <hr />
+                    <ul>
+                        <li>
+                            <h1>区</h1>
+                        </li>
+                        {
+                            qvArr.map(item => {
+                                return (
+                                    <li className={qvVal == item ? 'active' : ''} onClick={() => { this.props.qvCl(item) }}>{Object.keys(item)[0]}</li>
+                                )
+                            })
+                        }
+                    </ul>
+                    <hr />
+                    <ul>
+                        <li>
+                            <h1>街道</h1>
+                        </li>
+                        {
+                            jiedaoArr.map(jiedao => {
+                                return (
+                                    <li className={jiedaoVal == jiedao ? 'active' : ''} onClick={() => { this.props.jiedaoCl(jiedao) }}>{jiedao}</li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+            )
+        }
+    }
+    class App extends Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                area,
+                shengVal: "",
+                shiArr: [],
+                shiVal: "",
+                qvArr: [],
+                qvVal: "",
+                jiedaoArr: [],
+                jiedaoVal: ""
+
+            }
+        }
+        render() {
+            const { area } = this.state
+            return (
+                <div>
+                    <Child
+                        area={this.state.area}
+                        shengCl={(sheng) => { this.shengCl(sheng) }}
+                        shengVal={this.state.shengVal}
+                        shiVal={this.state.shiVal}
+                        shiArr={this.state.shiArr}
+                        shiCl={(shi) => { this.shiCl(shi) }}
+                        qvCl={(item) => { this.qvCl(item) }}
+                        qvArr={this.state.qvArr}
+                        qvVal={this.state.qvVal}
+                        jiedaoArr={this.state.jiedaoArr}
+                        jiedaoVal={this.state.jiedaoVal}
+                        jiedaoCl={(jiedao) => { this.jiedaoCl(jiedao) }}
+                    ></Child>
+                </div>
+            )
+        }
+        shengCl(sheng) {
+            // console.log(Object.keys(this.state.area[sheng][0]))
+            this.setState({
+                shiArr: Object.keys(this.state.area[sheng][0]),
+                shengVal: sheng
+            })
+        }
+        shiCl(shi) {
+            // console.log(shi)
+            // console.log(this.state.area[this.state.shengVal][0][shi])
+            this.setState({
+                qvArr: this.state.area[this.state.shengVal][0][shi],
+                shiVal: shi
+            })
+        }
+        qvCl(item) {
+            // console.log(Object.values(item)[0].split("、"))
+            this.setState({
+                jiedaoArr: Object.values(item)[0].split("、"),
+                qvVal: item
+            })
+        }
+        jiedaoCl(jiedao) {
+            // console.log(jiedao);
+            this.setState({
+                jiedaoVal: jiedao
+            })
+        }
+
+    }
+    //挂载节点
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    )
+</script>
+
+</html>
