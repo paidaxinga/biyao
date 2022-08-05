@@ -1,0 +1,74 @@
+<!--pages/details/details.wxml-->
+<view class="box">
+    <view class="top">
+        <!-- 筛选 -->
+        <view>
+            <text>尾号2049</text>
+            <cover-image src="../../imgs/下箭头.png" class="img"></cover-image>
+        </view>
+        <view>
+            <text>11/2021</text>
+            <cover-image src="../../imgs/下箭头.png" class="img"></cover-image>
+        </view>
+        <view>
+            <text>更多筛选</text>
+            <cover-image src="../../imgs/下箭头.png" class="img"></cover-image>
+        </view>
+    </view>
+    <!-- 转账明细 -->
+    <view class="content">
+        <text class="data">2021年11月</text>
+        <view class="name" wx:for="{{arr}}" wx:key="item"> 
+            <view class="name_view1" >
+                <text class="name_view1_text1">{{item.name}}</text>
+                <text class="name_view1_text2">{{item.date}}</text>
+            </view>
+            <view class="name_view2">
+                <text>{{item.money}}</text>
+                <cover-image src="/imgs/下箭头(1).png"></cover-image>
+            </view>
+        </view>
+    </view>
+    <view class="content">
+        <text class="data">2021年10月</text>
+        <view class="name" wx:for="{{arr1}}" wx:key="item"> 
+            <view class="name_view1" >
+                <text class="name_view1_text1">{{item.name}}</text>
+                <text class="name_view1_text2">{{item.date}}</text>
+            </view>
+            <view class="name_view2">
+                <text>{{item.money}}</text>
+                <cover-image src="/imgs/下箭头(1).png"></cover-image>
+            </view>
+        </view>
+    </view>
+    <view class="content">
+        <text class="data">2021年9月</text>
+        <view class="name" wx:for="{{arr2}}" wx:key="item"> 
+            <view class="name_view1" >
+                <text class="name_view1_text1">{{item.name}}</text>
+                <text class="name_view1_text2">{{item.date}}</text>
+            </view>
+            <view class="name_view2">
+                <text >{{item.money}}</text>
+                
+                <cover-image src="/imgs/下箭头(1).png"></cover-image>
+            </view>
+        </view>
+    </view>
+    <view class="content">
+        <text class="data">2021年08月</text>
+        <view class="name" wx:for="{{arr3}}" wx:key="item"> 
+            <view class="name_view1" >
+                <text class="name_view1_text1">{{item.name}}</text>
+                <text class="name_view1_text2">{{item.date}}</text>
+            </view>
+            <view class="name_view2">
+                <text >{{item.money}}</text>
+                
+                <cover-image src="/imgs/下箭头(1).png"></cover-image>
+            </view>
+        </view>
+    </view>
+    
+</view>
